@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.csu.mypetstore.persistence.LogMapper">
+
+  <cache />
+
+  <select id="getLogsByUserId"   parameterType="java.lang.String" resultType="org.csu.mypetstore.domain.Log">
+    SELECT
+      LOGID,
+      USERID,
+      LOGTIME,
+      USERACTION
+    FROM MYLOG
+    WHERE USERID = #{userId}
+    ORDER BY LOGTIME
+  </select>
+
+  <insert id="insertLog" parameterType="org.csu.mypetstore.domain.Log">
+    INSERT INTO MYLOG (LOGID,USERID, LOGTIME, USERACTION)
+    VALUES (#{logId,jdbcType=NUMERIC},#{userId}, #{logTime}, #{userAction})
+  </insert>
+
+</mapper>
